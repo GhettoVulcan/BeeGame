@@ -20,5 +20,9 @@ public class BeeScript : MonoBehaviour {
             body.AddForce(new Vector2(600f, 600f));
             temp = false;
         }
+
+        var vel = body.velocity;
+        var speed = vel.magnitude;
+
 	}
 }
