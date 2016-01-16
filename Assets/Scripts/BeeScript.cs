@@ -4,25 +4,40 @@ using System.Collections;
 public class BeeScript : MonoBehaviour {
 
     private Rigidbody2D body;
-    private bool temp = true;
+    public float magnitude = 1f;
+    public int bounce = 1;
+    public float initialForceX = 400f;
+    public float initialForceY = 400f;
 
     void Start ()
     {
         body = GetComponent<Rigidbody2D>();
+        body.isKinematic = false;
+        body.AddForce(new Vector2(initialForceX, initialForceY));
     }
 
 
     // Update is called once per frame
     void Update () {
-        if (temp)
-        {
-            body.isKinematic = false;
-            body.AddForce(new Vector2(600f, 600f));
-            temp = false;
-        }
-
-        var vel = body.velocity;
-        var speed = vel.magnitude;
-
+        
 	}
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.collider.tag == "Bee")
+        {
+            magnitude = body.velocity.magnitude;
+        }
+    }
+
+    void OnCollisionExit(Collision col)
+    {
+        if (col.collider.tag == "Bee")
+        {
+            Vector3 otherVelocity = col.rigidbody.velocity.normalized;
+            col.rigidbody.AddForce(otherVelocity, ForceMode.Impulse);
+        }
+    }
+
+
 }
