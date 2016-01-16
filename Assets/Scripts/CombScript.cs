@@ -40,7 +40,7 @@ public class CombScript : MonoBehaviour {
     public void Squashed()
     {
         sr.sprite = !IsFull ? emptyCombSquashed: fullCombSquashed;
-        IsSquashed = false;
+        IsSquashed = true;
     }
 
 }
