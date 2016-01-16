@@ -17,7 +17,6 @@ public class UIScore : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         CollectedCombs = gm.GatheredNumberofCombs;
-        //GetComponent<Text>().text = CollectedCombs.ToString();
         GetComponent<Text>().text = CollectedCombs.ToString();
     }
 }
