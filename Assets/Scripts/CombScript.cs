@@ -4,10 +4,13 @@ using System.Collections;
 public class CombScript : MonoBehaviour {
 
     private SpriteRenderer sr;
-    private bool IsActive = true;
+    private bool IsFull = true; //If bee is squashed, this is false
+    private bool IsSquashed = false;
 
     public Sprite emptyComb;
     public Sprite fullComb;
+    public Sprite emptyCombSquashed;
+    public Sprite fullCombSquashed;
     GMScript gm;
 
 	// Use this for initialization
@@ -24,13 +27,20 @@ public class CombScript : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if(Input.GetKey("mouse 0") && IsActive)
+        if(Input.GetKey("mouse 0") && IsFull && !IsSquashed)
         {
             sr.sprite = emptyComb;
             //Send the point to the game manager
             gm.GatheredNumberofCombs++;
-            IsActive = false;
+            IsFull = false;
         }
         
     }
+
+    public void Squashed()
+    {
+        sr.sprite = !IsFull ? emptyCombSquashed: fullCombSquashed;
+        IsSquashed = false;
+    }
+
 }
